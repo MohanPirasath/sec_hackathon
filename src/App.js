@@ -471,13 +471,7 @@ function AddProduct() {
             </FormControl>
           </Box>
 
-          {/* <TextField
-            id="category"
-            onChange={(e) => setcat(e.target.value)}
-            label="Category"
-            variant="standard"
-            sx={{ width: "400px" }}
-          /> */}
+         
           <Button
             variant="contained"
             onClick={() => {
@@ -491,9 +485,7 @@ function AddProduct() {
               };
               console.log(newproduct);
 
-              //  http://localhost:5000/Admin/AddProduct
-              // setcam([...cam,newproduct]);
-              // setcart([...cart, add]);
+              
 
               fetch(
                 `https://sec-node-hackathon.herokuapp.com/Admin/AddProduct`,
@@ -518,7 +510,10 @@ function AddProduct() {
 }
 
 function EditProduct() {
+
+
   const navigate=useNavigate()
+
 
 const handleEdit=({id,name,des,price,img})=>{
 localStorage.setItem("id",id)
@@ -531,12 +526,19 @@ localStorage.setItem("img",img)
 
   const [cam1, secam] = useState([]);
 
+
+  const handledelete=async(id)=>{
+    await fetch("https://sec-node-hackathon.herokuapp.com/Admin/EditProduct/"+id,{method:"DELETE"})
+    secam(cam1.filter(data=>data.id !== id))
+  }
+
+
   const Re = () => {
     useEffect(() => {
       fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`)
         .then((data) => data.json())
         .then((e) => secam(e));
-    }, [cam1]);
+    }, []);
   };
   Re();
   console.log(cam1);
@@ -578,42 +580,19 @@ localStorage.setItem("img",img)
                 
                }}   >Edit</Button>
 
-                {/* <Edit_btn e={e} /> */}
-                {/* <Button onClick={()=>{
-
-                }} >Edit</Button> */}
+               
                 <Button
                   onClick={() => {
-                    const Deletemovie = (id) => {
-                      fetch(
-                        `https://sec-node-hackathon.herokuapp.com/Product/${e.id}`,
-                        { method: "DELETE" }
-                      )
-                        .then(() => Re())
-                        // .then(() => selen(len+1))
-                        .then((res) => console.log(res));
-                    };
-                    Deletemovie();
+                    
+                    handledelete(e.id)
+                    secam(cam1.filter(data=>data.id !== e.id))
+                    Re()
+                   
                   }}
                 >
                   Delete
                 </Button>
-                {/* <Button
-                  sx={{ marginLeft: "auto", marginRight: "auto" }}
-                  size="small"
-                  // onClick={() => {
-                  //   const add = {
-                  //     name: e.name,
-                  //     img: e.img,
-                  //     des: e.des,
-                  //     price: e.price,
-                  //     cat: e.cat,
-                  //   };
-                  //   // setcart([...cart, add]);
-                  // }}
-                >
-                  Add to Cart
-                </Button> */}
+               
               </CardActions>
             </Card>
           </div>
