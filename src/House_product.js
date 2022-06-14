@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
-export function House_product({ cam, cart, setcart }) {
+export function House_product() {
   const[cam1,setcam]=useState([])
   
   useEffect(()=>{
@@ -63,7 +63,7 @@ export function House_product({ cam, cart, setcart }) {
                       price: e.price,
                       cat: e.cat,
                     };
-                    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/House_product`,{method:"POST",body:JSON.stringify(add),
+                    fetch(`https://sec-node-hackathon.herokuapp.com/House_product`,{method:"POST",body:JSON.stringify(add),
                     headers:{
                       "Content-type":"application/json"
                     }

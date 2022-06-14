@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
-export function Electric({ cam, cart, setcart }) {
+export function Electric() {
   const[cam1,setcam]=useState([])
   
   useEffect(()=>{
