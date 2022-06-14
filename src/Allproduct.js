@@ -8,11 +8,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import API from "../src/api"
 
-export function Allproduct({ cam, cart, setcart }) {
+export function Allproduct({  }) {
   const[cam1,setcam]=useState([])
 console.log(API)
  useEffect(()=>{
-    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/AllProduct`)
+    fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`)
     .then((data)=>data.json())
     .then((e)=>setcam(e))
   },[])
@@ -55,6 +55,7 @@ console.log(API)
                   onClick={() => {
                     const add = {
                       name: e.name,
+                      id:e.id,
                       img: e.img,
                       des: e.des,
                       price: e.price,
@@ -62,7 +63,7 @@ console.log(API)
                     };
                  
 
-                    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Cart`,{method:"POST",body:JSON.stringify(add),
+                    fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`,{method:"POST",body:JSON.stringify(add),
                     headers:{
                       "Content-type":"application/json"
                     }

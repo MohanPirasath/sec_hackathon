@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 
 
 
+
 export function Cart({ cart }) {
 
 
@@ -19,16 +20,26 @@ export function Cart({ cart }) {
 
 
   const[cam1,setcam]=useState([])
-  const [len,selen]=useState(cam1.length)
+  // const [len,selen]=useState(cam1.length)
   
+
+
   const Re = ()=>{
   useEffect(()=>{
-     fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Cart`)
+     fetch(`https://sec-node-hackathon.herokuapp.com/Cart`)
      .then((data)=>data.json())
      .then((e)=>setcam(e))
-   },[len,cam1])
+   },[])
   }
 Re()
+
+
+const handledelete=async(id)=>{
+  await fetch("https://sec-node-hackathon.herokuapp.com/Cart/"+id,{method:"DELETE"})
+  setcam(cam1.filter(data=>data.id !== id))
+}
+
+
   return (
     <div className="campro">
       <div className="makecenter">
@@ -61,17 +72,19 @@ Re()
                 {/* <Button sx={{marginLeft:"auto",marginRight:"auto"}} size="small">Add to Cart</Button> */}
                 <NoofProduct />
                 <div>
-                <Button  onClick={()=>{
+                <Button  onClick={()=>
+                  handledelete(e.id)
+                  
+                  // ()=>{ 
+                //  const id=e.id
                  
-                 const Deletemovie = (id) => {
-                   fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Cart/${e.id}`, { method: "DELETE" })
-                     .then(() => Re())
-                     .then(() => selen(len+1))
-                     .then((res) => console.log(res))
-                 };
-                 Deletemovie()
-                }
-                
+                //    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Cart`+ id, { method: "DELETE" })
+                //      .then(() => Re())
+                //      .then(() => selen(len+1))
+                //      .then((res) => console.log(res))
+                 
+                 
+                // }
                 }>Remove item</Button>
 
                   

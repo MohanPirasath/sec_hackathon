@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
-export function Camera({ cam, setcart, cart }) {
+export function Camera() {
   const[cam1,setcam]=useState([])
   
    useEffect(()=>{
@@ -36,7 +36,8 @@ export function Camera({ cam, setcart, cart }) {
                 component="img"
                 height="140"
                 image={e.img}
-                alt={e.name} />
+                alt={e.name}
+                objectFit="fill" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {e.name}
@@ -54,12 +55,13 @@ export function Camera({ cam, setcart, cart }) {
                 <Button sx={{ marginLeft: "auto", marginRight: "auto" }} onClick={() => {
                   const add = {
                     name: e.name,
+                    id:e.id,
                     img: e.img,
                     des: e.des,
                     price: e.price,
                     cat: e.cat,
                   };
-                  fetch(`https://sec-node-hackathon.herokuapp.com/Cart`,{method:"POST",body:JSON.stringify(add),
+                  fetch(`https://sec-node-hackathon.herokuapp.com/cam`,{method:"POST",body:JSON.stringify(add),
                   headers:{
                     "Content-type":"application/json"
                   }

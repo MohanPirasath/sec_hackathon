@@ -4,17 +4,9 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 // import AdbIcon from "@mui/icons-material/Adb";
 
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 // import { useNavigate } from "react-router-dom";
 
@@ -28,9 +20,14 @@ import Fab from "@mui/material/Fab";
 import LoginIcon from "@mui/icons-material/Login";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TextField from "@mui/material/TextField";
+
+import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from '@mui/material/MenuItem';
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import {
   Routes,
@@ -48,6 +45,9 @@ import { ChooseConcern } from "./ChooseConcern";
 import { ContactUs } from "./ContactUs";
 import { Filter } from "./Filter";
 import { Cart } from "./Cart";
+import { Adminlogin } from "./Adminlogin";
+import { AdminResponsiveAppBar } from "./pages.1";
+import { Adminhome } from "./Adminhome";
 
 function App() {
   // const [cam, setcam] = useState([
@@ -180,7 +180,11 @@ function App() {
           element={[<ResponsiveAppBar />, <ContactUs />]}
         />
         <Route path="/Admin" element={[<Adminlogin />]} />
-        <Route path="/Admin/Home" element={[<AdminResponsiveAppBar />]} />
+        <Route path="/Admin/Edit/:id" element={[<Edit />]} />
+        <Route
+          path="/Admin/Home"
+          element={[<AdminResponsiveAppBar />, <Adminhome />]}
+        />
         <Route
           path="/Admin/EditProduct"
           element={[<AdminResponsiveAppBar />, <EditProduct />]}
@@ -242,38 +246,164 @@ function Login() {
   );
 }
 
-function Adminlogin() {
-  const navigate = useNavigate();
+// function Edit_btn({e}) {
+//   const navigate = useNavigate();
+
+//   return (
+//     <div>
+//       <Button
+//         onClick={() => {
+//           navigate(`/Admin/Edit/${e.id}`);
+//         }}
+//       >
+//         Edit
+//       </Button>
+//     </div>
+//   );
+// }
+
+function Edit() {
+  const {id}=useParams()
+  
+const navigate=useNavigate()
+
+  const [temname, setname] = useState(localStorage.getItem("name"));
+  const [temid, setid] = useState(localStorage.getItem("id"));
+  const [Img, setimg] = useState(localStorage.getItem("img"));
+  const [About, setabout] = useState(localStorage.getItem("des"));
+  const [price, setprice] = useState(localStorage.getItem("price"));
+  const [cat, setcat] = useState(localStorage.getItem("cat"));
+  const [CATEGORY, setAge] = useState(localStorage.getItem("cat"));
+  const handleChange = (event) => {
+    setAge(event.target.value);
+    setcat(event.target.value);
+  } 
+  // console.log(temname,Img,About,price,cat)
   return (
+
+
     <div>
+      
       <div className="makecenterfil">
-        <h1>ADMIN LOGIN</h1>
+        <h1>Edit Products</h1>
       </div>
-      <form className="form">
-        <TextField id="filled-basic" label="Admin Id" variant="filled" />
-        <TextField id="filled-basic" label="Password" variant="filled" />
-        <Fab
-          variant="extended"
-          color="primary"
-          aria-label="add"
-          sx={{ width: "210px" }}
-          onClick={() => navigate("/Admin/Home")}
-        >
-          <LockOpenIcon sx={{ mr: 1 }} />
-          Admin Login
-        </Fab>
-      </form>
+      <div>
+        <form className="form">
+          <TextField
+            id="id"
+            type="number"
+            defaultValue={temid}
+            onChange={(e) => setid(e.target.value)}
+            label="No of Product"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
+          <TextField
+            id="name"
+            // defaultvalue={temname}
+            defaultValue={temname}
+
+
+            onChange={(e) => setname(e.target.value)}
+            label="Product Name"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
+          {/* {console.log(temname)} */}
+          <TextField
+            id="img"
+            defaultValue={Img}
+
+            onChange={(e) => setimg(e.target.value)}
+            label="Img Src"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
+          {/* {console.log(Img)} */}
+
+          <TextField
+            id="about"
+            onChange={(e) => setabout(e.target.value)}
+            defaultValue={About}
+
+            label="About"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
+          <TextField
+            id="price"
+            onChange={(e) => setprice(e.target.value)}
+            defaultValue={price}
+
+            label="Price"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
+
+          <Box sx={{ minWidth: 220 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                SELECT CATEGORY
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                defaultValue={cat}
+                label="CATEGORY"
+                onChange={handleChange}
+              >
+                <MenuItem value={"cam"}>Camera</MenuItem>
+                <MenuItem value={"car"}>Car's</MenuItem>
+                <MenuItem value={"Ele"}>Electric Products</MenuItem>
+                <MenuItem value={"Household"}>Household Products</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Button
+            variant="contained"
+            onClick={() => {
+              const newproduct = {
+                name: temname,
+                img: Img,
+                des: About,
+                id: temid,
+                price: price,
+                cat: cat,
+              };
+
+              fetch(`https://sec-node-hackathon.herokuapp.com/Admin/Edit/${id}`,{
+                method:"PUT",body: JSON.stringify(newproduct),headers:{
+                  "Content-Type":"application/json"
+                }
+              })
+              navigate("/Admin/EditProduct")
+          
+            }}
+          >
+            SUBMIT
+          </Button>
+        </form>
+      </div>
     </div>
+    
   );
 }
 
 function AddProduct() {
   const navigate = useNavigate();
+
   const [temname, setname] = useState();
+  const [temid, setid] = useState();
   const [Img, setimg] = useState();
   const [About, setabout] = useState();
   const [price, setprice] = useState();
   const [cat, setcat] = useState();
+  const [CATEGORY, setAge] = React.useState("");
+  const handleChange = (event) => {
+    setAge(event.target.value);
+    setcat(event.target.value);
+  };
   return (
     <div>
       <div className="makecenterfil">
@@ -281,6 +411,14 @@ function AddProduct() {
       </div>
       <div>
         <div className="form">
+          <TextField
+            id="id"
+            type="number"
+            onChange={(e) => setid(e.target.value)}
+            label="No of Product"
+            variant="standard"
+            sx={{ width: "400px" }}
+          />
           <TextField
             id="name"
             onChange={(e) => setname(e.target.value)}
@@ -312,13 +450,34 @@ function AddProduct() {
             variant="standard"
             sx={{ width: "400px" }}
           />
-          <TextField
+
+          <Box sx={{ minWidth: 220 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                SELECT CATEGORY
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={CATEGORY}
+                label="CATEGORY"
+                onChange={handleChange}
+              >
+                <MenuItem value={"cam"}>Camera</MenuItem>
+                <MenuItem value={"car"}>Car's</MenuItem>
+                <MenuItem value={"Ele"}>Electric Products</MenuItem>
+                <MenuItem value={"Household"}>Household Products</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          {/* <TextField
             id="category"
             onChange={(e) => setcat(e.target.value)}
             label="Category"
             variant="standard"
             sx={{ width: "400px" }}
-          />
+          /> */}
           <Button
             variant="contained"
             onClick={() => {
@@ -326,7 +485,7 @@ function AddProduct() {
                 name: temname,
                 img: Img,
                 des: About,
-
+                id: temid,
                 price: price,
                 cat: cat,
               };
@@ -358,166 +517,18 @@ function AddProduct() {
   );
 }
 
-const pages = ["EditProduct", "AddProduct", "FormFeedback", "Orders"];
-const settings = ["Profile", "Dashboard", "Logout"];
-export const AdminResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+function EditProduct() {
+  const navigate=useNavigate()
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+const handleEdit=({id,name,des,price,img})=>{
+localStorage.setItem("id",id)
+localStorage.setItem("name",name)
+localStorage.setItem("des",des)
+localStorage.setItem("price",price)
+localStorage.setItem("img",img)
+}
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  const navigate = useNavigate();
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <img
-            className="img"
-            src="https://www.jones-equipment.com/assets/jones-equipment-rental-logo.png"
-            alt="logo"
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/Admin/Home"
-            sx={{
-              mr: 7,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 900,
-              letterSpacing: ".01rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Johns Rental <br />
-            Products
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography marginRight={"20px"} textAlign="center">
-                    {pages}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Rental <br />
-            Products
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => navigate(`/Admin/${page}`)}
-                sx={{ my: 3, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Button sx={{ color: "white" }} onClick={() => navigate("/filter")}>
-            Filter
-          </Button>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
-};
-
-function EditProduct({ cam }) {
   const [cam1, secam] = useState([]);
 
   const Re = () => {
@@ -558,6 +569,16 @@ function EditProduct({ cam }) {
                 </Typography>
               </CardContent>
               <CardActions>
+
+               <Button  onClick={()=>{
+                
+                 handleEdit(e)
+                  navigate(`/Admin/Edit/${e.id}`)
+
+                
+               }}   >Edit</Button>
+
+                {/* <Edit_btn e={e} /> */}
                 {/* <Button onClick={()=>{
 
                 }} >Edit</Button> */}
