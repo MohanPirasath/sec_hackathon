@@ -1,38 +1,159 @@
-.App {
+
+  
+
+body{
+  background-color: white;
+}
+
+.padleft{
+  padding-left: 10px;
+}
+
+.makecenter_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* width: 100vw; */
+  margin-top: 0;
+}
+
+.makecenter_btns{
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+.makecenter_date{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap:100px;
+  width: 100vw;
+  margin-top: 0;
+
+
+}
+
+
+/* .makecenter_btns span{
+  color: red;
+} */
+
+.checkout{
+  width: 100vw;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.makecenterfil{
+
+text-align: center;
+width: 100vw;
+
+}
+
+
+
+
+
+.login{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.form{
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.makecenter{
+  margin-top: 20px;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.img{
+  height: 60px;
+  width: 80px;
+  padding: 0;
+  margin-right: 10px;
 }
+
+.dashimg{
+  max-height: 480px;
+  max-width: 1230px;
+  min-width: 200px;
+  min-height: 400px;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: center; */
+text-align: center;
+  margin: 20px;
+  background-color: aliceblue;
+  /* align-items: center; */
+  justify-content: center;
+  /* border: 20px solid rgb(88, 17, 203); */
+
+  background-image: url("https://www.google.com/imgres?imgurl=http%3A%2F%2Fblog.phowd.com%2Fwp-content%2Fuploads%2F2015%2F08%2Fchoose-photo-lens.png&imgrefurl=https%3A%2F%2Fblog.phowd.com%2F2015%2F08%2Fa-guide-to-choosing-the-right-camera-lens-for-the-job%2F&tbnid=2oZZO4JcXetdCM&vet=12ahUKEwikmvaGj6r4AhX3gGMGHRv-CtwQMygRegUIARD2AQ..i&docid=KmAqE5iZtr8vVM&w=1024&h=316&q=camera%20lens%20big%20image&ved=2ahUKEwikmvaGj6r4AhX3gGMGHRv-CtwQMygRegUIARD2AQ");
+  /* background-image: url("./img/Untitled\ design.png"); */
+  /* object-fit:cover; */
+border-radius: 22px;
+}
+
+
+/* .icon_btn{
+  margin-right: 55px;
+} */
+
+.card{
+ margin-left: auto;
+ margin-right: auto;
+ margin-top: 10px;
+}
+.campro{
+  display: flex;
+flex-wrap: wrap;
+
+  gap: 65px;
+  /* margin-left: 40px; */
+ ;
+
+  
+}
+
+
+.makecenter{
+  text-align: center;
+  height: 20px;
+  width: 1900px;
+}
+
+.makecentercon{
+  text-align: center;
+}
+
+
+.cat{
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
