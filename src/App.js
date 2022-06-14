@@ -1,7 +1,7 @@
 import "./App.css";
 
 import * as React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 // import AdbIcon from "@mui/icons-material/Adb";
 
 import AppBar from "@mui/material/AppBar";
@@ -158,69 +158,36 @@ function App() {
       <Routes>
         <Route path="/Home" element={[<ResponsiveAppBar />, <Dashimg />]} />
         <Route path="/" element={[<Login />]} />
-        <Route
-          path="/cart"
-          element={[<ResponsiveAppBar />, <Cart />]}
-        />
-        <Route
-          path="/cam"
-          element={[
-            <ResponsiveAppBar />,
-            <Camera  />,
-          ]}
-        />
+        <Route path="/cart" element={[<ResponsiveAppBar />, <Cart />]} />
+        <Route path="/cam" element={[<ResponsiveAppBar />, <Camera />]} />
         <Route
           path="/ChooseConcern"
-          element={[<ResponsiveAppBar />, <ChooseConcern  />]}
+          element={[<ResponsiveAppBar />, <ChooseConcern />]}
         />
-        <Route
-          path="/cars"
-          element={[
-            <ResponsiveAppBar />,
-            <Cars  />,
-          ]}
-        />
-        <Route
-          path="/Ele"
-          element={[
-            <ResponsiveAppBar />,
-            <Electric  />,
-          ]}
-        />
-        <Route
-          path="/filter"
-          element={[<ResponsiveAppBar />, <Filter  />]}
-        />
+        <Route path="/cars" element={[<ResponsiveAppBar />, <Cars />]} />
+        <Route path="/Ele" element={[<ResponsiveAppBar />, <Electric />]} />
+        <Route path="/filter" element={[<ResponsiveAppBar />, <Filter />]} />
         <Route
           path="/ALLPRODUCT"
-          element={[
-            <ResponsiveAppBar />,
-            <Allproduct  />,
-          ]}
+          element={[<ResponsiveAppBar />, <Allproduct />]}
         />
         <Route
           path="/House_product"
-          element={[
-            <ResponsiveAppBar />,
-            <House_product  />,
-          ]}
+          element={[<ResponsiveAppBar />, <House_product />]}
         />
         <Route
           path="/ContactUs"
-          element={[<ResponsiveAppBar />, <ContactUs  />]}
+          element={[<ResponsiveAppBar />, <ContactUs />]}
         />
         <Route path="/Admin" element={[<Adminlogin />]} />
         <Route path="/Admin/Home" element={[<AdminResponsiveAppBar />]} />
         <Route
           path="/Admin/EditProduct"
-          element={[<AdminResponsiveAppBar />, <EditProduct  />]}
+          element={[<AdminResponsiveAppBar />, <EditProduct />]}
         />
         <Route
           path="/Admin/AddProduct"
-          element={[
-            <AdminResponsiveAppBar />,
-            <AddProduct  />,
-          ]}
+          element={[<AdminResponsiveAppBar />, <AddProduct />]}
         />
       </Routes>
     </div>
@@ -248,15 +215,15 @@ function Login() {
           </Fab>
         </form>
         <Fab
-            variant="extended"
-            color="primary"
-            aria-label="add"
-            sx={{ width: "210px" ,marginTop:"15px"}}
-            onClick={() => navigate("/Home")}
-          >
-            <LockOpenIcon sx={{ mr: 1 }} />
-            Signup
-          </Fab>
+          variant="extended"
+          color="primary"
+          aria-label="add"
+          sx={{ width: "210px", marginTop: "15px" }}
+          onClick={() => navigate("/Home")}
+        >
+          <LockOpenIcon sx={{ mr: 1 }} />
+          Signup
+        </Fab>
         <hr></hr>
         <div>
           <Fab
@@ -356,33 +323,31 @@ function AddProduct() {
             variant="contained"
             onClick={() => {
               const newproduct = {
-                
-                name:  temname ,
-                 img:  Img ,
-                 des:  About ,
-               
-                price: price ,
-                cat: cat ,
+                name: temname,
+                img: Img,
+                des: About,
+
+                price: price,
+                cat: cat,
               };
-               console.log(newproduct)
-              
+              console.log(newproduct);
+
               //  http://localhost:5000/Admin/AddProduct
               // setcam([...cam,newproduct]);
               // setcart([...cart, add]);
 
-              fetch(`https://sec-node-hackathon.herokuapp.com/Admin/AddProduct`,{method:"POST",body:JSON.stringify(newproduct),
-              headers:{
-                "Content-type":"application/json"
-              }
-            }
-              ).then(()=>{
-
-              navigate("/Admin/EditProduct");
-
-              })
-
-
-
+              fetch(
+                `https://sec-node-hackathon.herokuapp.com/Admin/AddProduct`,
+                {
+                  method: "POST",
+                  body: JSON.stringify(newproduct),
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                }
+              ).then(() => {
+                navigate("/Admin/EditProduct");
+              });
             }}
           >
             SUBMIT
@@ -553,19 +518,17 @@ export const AdminResponsiveAppBar = () => {
 };
 
 function EditProduct({ cam }) {
+  const [cam1, secam] = useState([]);
 
-const[cam1,secam]=useState([])
-
-const Re=()=>{
-useEffect(()=>{
-  fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`)
-  .then((data)=>data.json())
-  .then((e)=>secam(e))
-
-},[cam1])
-}
-Re()
-console.log(cam1)
+  const Re = () => {
+    useEffect(() => {
+      fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`)
+        .then((data) => data.json())
+        .then((e) => secam(e));
+    }, [cam1]);
+  };
+  Re();
+  console.log(cam1);
 
   return (
     <div className="campro">
@@ -598,15 +561,22 @@ console.log(cam1)
                 {/* <Button onClick={()=>{
 
                 }} >Edit</Button> */}
-                <Button onClick={()=>{
-                   const Deletemovie = (id) => {
-                    fetch(`https://sec-node-hackathon.herokuapp.com/Product/${e.id}`, { method: "DELETE" })
-                      .then(() => Re())
-                      // .then(() => selen(len+1))
-                      .then((res) => console.log(res))
-                  };
-                  Deletemovie()
-                }}>Delete</Button>
+                <Button
+                  onClick={() => {
+                    const Deletemovie = (id) => {
+                      fetch(
+                        `https://sec-node-hackathon.herokuapp.com/Product/${e.id}`,
+                        { method: "DELETE" }
+                      )
+                        .then(() => Re())
+                        // .then(() => selen(len+1))
+                        .then((res) => console.log(res));
+                    };
+                    Deletemovie();
+                  }}
+                >
+                  Delete
+                </Button>
                 {/* <Button
                   sx={{ marginLeft: "auto", marginRight: "auto" }}
                   size="small"
@@ -631,9 +601,5 @@ console.log(cam1)
     </div>
   );
 }
-
-
-
-
 
 export default App;

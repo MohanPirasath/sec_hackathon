@@ -12,7 +12,7 @@ export function Allproduct({ cam, cart, setcart }) {
   const[cam1,setcam]=useState([])
 console.log(API)
  useEffect(()=>{
-    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Products`)
+    fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/AllProduct`)
     .then((data)=>data.json())
     .then((e)=>setcam(e))
   },[])

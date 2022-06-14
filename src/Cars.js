@@ -11,7 +11,7 @@ export function Cars({ cam, cart, setcart }) {
   const[cam1,setcam]=useState([])
   
   useEffect(()=>{
-     fetch(`https://sec-node-hackathon.herokuapp.com/Products`)
+     fetch(`https://sec-node-hackathon.herokuapp.com/cars`)
      .then((data)=>data.json())
      .then((e)=>setcam(e))
    },[])
