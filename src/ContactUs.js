@@ -6,10 +6,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Fab from '@mui/material/Fab';
 import TextField from '@mui/material/TextField';
+import { Navigate, useNavigate } from "react-router-dom";
 
 export function ContactUs() {
 
   const [CATEGORY, setAge] = React.useState('');
+  const navigate=useNavigate()
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -86,7 +88,11 @@ export function ContactUs() {
             placeholder="" />
 
 
-          <Fab variant="extended" sx={{ width: "220px", marginBottom: "20px" }}>
+          <Fab variant="extended" sx={{ width: "220px", marginBottom: "20px" }}
+          onClick={()=>{
+            alert("Form Submited")
+            navigate("/Home")}}
+          >
             {/* <NavigationIcon sx={{ mr: 1 }} /> */}
             SUBMIT
           </Fab>

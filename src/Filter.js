@@ -1,11 +1,15 @@
 import * as React from "react";
+// import useState from "react";
+import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Button } from "@mui/material";
 
 export function Filter() {
+  const navigate= useNavigate()
   const [CATEGORY, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -38,6 +42,12 @@ export function Filter() {
             </Select>
           </FormControl>
         </Box>
+        <div className="makethiscenter">
+        <Button 
+        onClick={()=>navigate("/ChooseConcern")}
+        >Done</Button>
+        </div>
+        
       </div>
     </div>
   );
