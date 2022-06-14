@@ -11,7 +11,7 @@ export function Camera({ cam, setcart, cart }) {
   const[cam1,setcam]=useState([])
   
    useEffect(()=>{
-      fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Products`)
+      fetch(`https://sec-node-hackathon.herokuapp.com/cam`)
       .then((data)=>data.json())
       .then((e)=>setcam(e))
     },[])
@@ -59,7 +59,7 @@ export function Camera({ cam, setcart, cart }) {
                     price: e.price,
                     cat: e.cat,
                   };
-                  fetch(`https://62a734fbbedc4ca6d7c4a9d0.mockapi.io/Cart`,{method:"POST",body:JSON.stringify(add),
+                  fetch(`https://sec-node-hackathon.herokuapp.com/Cart`,{method:"POST",body:JSON.stringify(add),
                   headers:{
                     "Content-type":"application/json"
                   }
