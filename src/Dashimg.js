@@ -42,6 +42,7 @@ export function Dashimg() {
         <div className="cat">
           <div className="icon_btn">
             <IconButton
+            sx={{color:"black"}}
               aria-label="delete"
               size="large"
               onClick={() => navigate("/cam")}
@@ -52,7 +53,9 @@ export function Dashimg() {
           </div>
 
           <div className="icon_btn">
-            <IconButton aria-label="delete" size="large"
+            <IconButton aria-label="delete" size="large" 
+            sx={{color:"gray"}}
+
               onClick={() => navigate("/cars")}
               >
               <DirectionsCarIcon fontSize="inherit" />
@@ -62,6 +65,8 @@ export function Dashimg() {
 
           <div className="icon_btn">
             <IconButton aria-label="delete" size="large"
+            sx={{color:"red"}}
+
               onClick={() => navigate("/Ele")}
             
             >
@@ -73,6 +78,8 @@ export function Dashimg() {
 
           <div className="icon_btn icons_btn">
             <IconButton aria-label="delete" size="large"
+            sx={{color:"green"}}
+
             onClick={()=>navigate("/House_product")}
             >
               <MapsHomeWorkIcon fontSize="inherit" />
