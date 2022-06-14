@@ -538,7 +538,7 @@ localStorage.setItem("img",img)
       fetch(`https://sec-node-hackathon.herokuapp.com/ALLProduct`)
         .then((data) => data.json())
         .then((e) => secam(e));
-    }, []);
+    }, [cam1]);
   };
   Re();
   console.log(cam1);
