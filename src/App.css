@@ -9,6 +9,10 @@ body{
   padding-left: 10px;
 }
 
+.makethiscenter{
+  text-align: center;
+}
+
 .makecenter_btn{
   display: flex;
   justify-content: center;

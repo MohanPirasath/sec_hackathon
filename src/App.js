@@ -54,6 +54,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/Home" element={[<ResponsiveAppBar />, <Dashimg />]} />
+        <Route path="/404" element={[<ResponsiveAppBar />,<Fournotfour/>]} />
+        <Route path="*" element={[<ResponsiveAppBar />,<Fournotfour/>]} />
         <Route path="/" element={[<Login />]} />
         <Route path="/cart" element={[<ResponsiveAppBar />, <Cart />]} />
         <Route path="/cam" element={[<ResponsiveAppBar />, <Camera />]} />
@@ -195,6 +197,18 @@ function Login() {
     </div>
   );
 }
+
+
+function Fournotfour(){
+  return(
+    <div className="makethiscenter">
+      <h1>
+        404 ERROR
+      </h1>
+    </div>
+  )
+}
+
 
 
 function Edit() {

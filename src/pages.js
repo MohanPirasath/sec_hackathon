@@ -134,6 +134,8 @@ const navigate=useNavigate()
               </Button>
             ))}
           </Box>
+          <input lable="search" placeholder="search"></input>
+          <Button sx={{color:"white"}}>search</Button>
           
               <Button sx={{color:"white"}} onClick={()=>navigate("/filter")}>Filter</Button>
               
