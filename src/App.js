@@ -22,6 +22,7 @@ import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from '@mui/material/MenuItem';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+// import API from "../src/api"
 
 import {
   Routes,
@@ -106,6 +107,61 @@ function App() {
 }
 
 function Login() {
+
+// const API ="https://sec-node-hackathon.herokuapp.com";
+const API ="http://localhost:5000";
+  const loginsubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const fet = await fetch(`${API}/login`, {
+        method: "POST",
+        body: JSON.stringify({
+          username: values.username,
+          password: values.password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+        // credentials: "include",
+      });
+      if (fet.status === 400 || !fet) {
+        window.alert("Invalid credentials");
+      } else {
+        // localStorage.setItem("username", values.tempuser);
+        window.alert("successfull login");
+        navigate("/Home");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const signupsubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const fet = await fetch(`${API}/signup`, {
+        method: "POST",
+        body: JSON.stringify({
+          username: values.username,
+          password: values.password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+        // credentials: "include",
+      });
+      if (fet.status === 400 || !fet) {
+        window.alert("username already exist try another username");
+      } else {
+        // localStorage.setItem("username", values.tempuser);
+        window.alert("signup successful login now");
+       
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   const formvalidationSchema = yup.object({
     username: yup
       .string()
@@ -124,7 +180,7 @@ function Login() {
         password: "",
       },
       validationSchema: formvalidationSchema,
-      onSubmit: () => navigate("/Home"),
+      // onSubmit: () => navigate("/Home"),
     });
 
   const navigate = useNavigate();
@@ -164,7 +220,7 @@ function Login() {
             color="primary"
             aria-label="add"
             sx={{ width: "210px" }}
-            onClick={() => navigate("/Home")}
+            onClick={loginsubmit}
           >
             <LockOpenIcon sx={{ mr: 1 }} />
             Login
@@ -175,7 +231,7 @@ function Login() {
           color="primary"
           aria-label="add"
           sx={{ width: "210px", marginTop: "15px" }}
-          onClick={() => navigate("/Home")}
+          onClick={signupsubmit}
         >
           <LockOpenIcon sx={{ mr: 1 }} />
           Signup
