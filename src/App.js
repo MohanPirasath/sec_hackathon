@@ -205,6 +205,7 @@ const API ="https://sec-node-hackathon.herokuapp.com";
           <TextField
             id="filled-basic"
             name="password"
+            type="password"
             value={values.password}
             error={errors.password && touched.password}
             helperText={

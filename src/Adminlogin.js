@@ -73,6 +73,7 @@ export function Adminlogin() {
         variant="filled" />
         <TextField id="filled-basic" 
          name="password" 
+         type="password"
          value={values.password}
          error={errors.password && touched.password} 
          helperText={errors.password && touched.password ? errors.password : ""}
